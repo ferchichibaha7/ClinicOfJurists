@@ -1,0 +1,36 @@
+
+.toolbar-background {
+  background-color: #000000;
+}
+
+ion-toolbar{
+  --background:#121212;
+}
+.circle {
+  z-index: 1;
+height: 100px;
+  border-radius: 50%;
+  background-color: #df5c340d;
+  box-shadow:
+    0 0 60px 30px #bbe9221e,  /* inner white */
+    0 0 100px 60px rgba(25, 232, 191, 0.127), /* middle magenta */
+    0 0 140px 90px rgba(255, 0, 238, 0.181); /* outer cyan */
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+}
+.circleb {
+  z-index: 1;
+
+  border-radius: 50%;
+  background-color: #7334df0d;
+  box-shadow:
+    0 0 60px 30px #bbe9221e,  /* inner white */
+    0 0 100px 60px rgba(25, 232, 191, 0.127), /* middle magenta */
+    0 0 140px 90px rgba(0, 255, 191, 0.181); /* outer cyan */
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
