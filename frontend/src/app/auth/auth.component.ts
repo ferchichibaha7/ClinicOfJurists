@@ -1,31 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { IonicModule } from '@ionic/angular';
-import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
+import { AuthService } from './auth.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  imports: [IonicModule],
+  imports: [IonicModule ,RouterModule,
+    CommonModule, // For common directives like ngIf, ngFor
+    ReactiveFormsModule, // For reactive form handling
+    RouterModule,],
   styleUrls: ['./auth.component.scss'],
   standalone: true,
 })
 export class AuthComponent  implements OnInit {
-  username = ''
-  password = ''
-  constructor(private router: Router) {
-
+  loginForm: FormGroup
+  errorMessages: any = [];
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
     addIcons({});
   }
   ngOnInit(): void {
   }
 
-  navigateToTab1() {
-    this.router.navigate(['/home/tab1']);
+
+
+
+get f() {
+  return this.loginForm.controls;
+}
+
+onSubmit() {
+  if (this.loginForm.invalid) {
+    return;
   }
+
+  this.authService.login(this.loginForm.value).subscribe(
+    response => {
+      this.errorMessages = []
+      this.router.navigate(['/']);
+    },
+    error => {
+      this.errorMessages = error.error.errors || ['An unexpected error occurred.'];
+    }
+  );
+}
 
 
   async loginWithGoogle() {
@@ -33,10 +59,17 @@ export class AuthComponent  implements OnInit {
       const user = await GoogleAuth.signIn();
       if (user && user.authentication) {
         const idToken = user.authentication.idToken; // This is the ID token you need to send to your backend.
-        console.log(user);
-
-        // Here you would send the idToken to your backend
-        // await sendTokenToBackend(idToken);
+        if(idToken){
+          this.authService.login_google(idToken).subscribe(
+            response => {
+              this.errorMessages = []
+              this.router.navigate(['/']);
+            },
+            error => {
+              this.errorMessages = error.error.errors || ['An unexpected error occurred.'];
+            }
+          )
+        }
       } else {
         console.error('Google Auth failed or returned no user.');
       }

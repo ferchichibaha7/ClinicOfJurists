@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { CategoryListComponent } from '../quiz/category-list/category-list.component';
+import { SubcategoryListComponent } from '../quiz/subcategory-list/subcategory-list.component';
 
 export const routes: Routes = [
   {
@@ -7,10 +9,16 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: '',
+       redirectTo: '/home',
+      pathMatch: 'full'
+      },
+      {
+        path: 'home',
         loadComponent: () =>
           import('../tab1/tab1.page').then((m) => m.Tab1Page),
       },
+
       {
         path: 'tab2',
         loadComponent: () =>
@@ -27,6 +35,23 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
     ],
+  },
+
+  {
+    path: 'quiz',
+    component: CategoryListComponent,
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('../tab1/tab1.page').then((m) => m.Tab1Page),
+      }
+    ],
+  },
+
+  {
+    path: 'categories/:categoryId/subcategories',
+    component: SubcategoryListComponent,
   },
   {
     path: '',

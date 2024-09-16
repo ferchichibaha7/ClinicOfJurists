@@ -1,0 +1,79 @@
+<ion-content>
+  <div class="circle"></div>
+  <div class="circleb"></div>
+
+  <div class="grid place-items-center p-8 w-full">
+    <img class="w-16 mt-8 mb-8" src="./assets/logo_white.png" alt="">
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-full">
+      <div class="w-full mt-8">
+  <!-- Display error messages -->
+  <div *ngIf="errorMessages.length > 0 " class="error-messages mb-4">
+    <div *ngFor="let error of errorMessages" class="text-red-500">
+      {{ error.msg }}
+    </div>
+  </div>
+
+        <!-- Name Input -->
+        <ion-item class="custom-item">
+          <ion-input type="text" placeholder="Nom" formControlName="name"></ion-input>
+        </ion-item>
+        <div *ngIf="f['name'].errors?.['required'] && f['name'].touched" class="text-red-500 text-xxs mb-2">
+          Le nom est requis.
+        </div>
+
+        <!-- Email Input -->
+        <ion-item class="custom-item">
+          <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+        </ion-item>
+        <div *ngIf="f['email'].errors?.['required'] && f['email'].touched" class="text-red-500 text-xxs mb-2">
+          L'email est requis.
+        </div>
+        <div *ngIf="f['email'].errors?.['email'] && f['email'].touched" class="text-red-500 text-xxs mb-2">
+          Entrez un email valide.
+        </div>
+
+        <!-- Password Input -->
+        <ion-item class="custom-item">
+          <ion-input type="password" placeholder="Mot de passe" formControlName="password"></ion-input>
+        </ion-item>
+        <div *ngIf="f['password'].errors?.['required'] && f['password'].touched" class="text-red-500 text-xxs mb-2">
+          Le mot de passe est requis.
+        </div>
+        <div *ngIf="f['password'].errors?.['minlength'] && f['password'].touched" class="text-red-500 text-xxs mb-2">
+          Le mot de passe doit comporter au moins 6 caractères.
+        </div>
+
+        <!-- Password Confirmation Input -->
+        <ion-item class="custom-item">
+          <ion-input type="password" placeholder="Confirmez le mot de passe" formControlName="confirmPassword"></ion-input>
+        </ion-item>
+        <div *ngIf="f['confirmPassword'].errors?.['required'] && f['confirmPassword'].touched" class="text-red-500 text-xxs mb-2 ">
+          La confirmation du mot de passe est requise.
+        </div>
+        <div *ngIf="registerForm.errors?.['mismatch'] && f['confirmPassword'].touched" class="text-red-500 text-xxs mb-2 ">
+          Les mots de passe ne correspondent pas.
+        </div>
+
+        <!-- Phone Number Input -->
+        <ion-item class="custom-item">
+          <ion-input type="tel" placeholder="Numéro de téléphone" formControlName="phone_number"></ion-input>
+        </ion-item>
+
+      </div>
+
+      <button type="submit" class="mt-4 py-4 w-full text-white bg-gradient-to-r rounded-lg font-medium text-sm px-5 text-center me-2 mb-2"
+      style="background: linear-gradient(to right, rgba(186, 64, 239, 0.168), rgba(97, 234, 170, 0.234));"
+      [disabled]="registerForm.invalid">
+      S'inscrire
+      </button>
+    </form>
+
+    <div class="flex my-2">
+      <span class="text-xxs opacity-30 mr-2">Déjà membre ?</span>
+      <span class="text-xxs text-white">
+        <a [routerLink]="['/auth']" class="hover:underline">Connectez-vous maintenant</a>
+      </span>
+    </div>
+  </div>
+</ion-content>

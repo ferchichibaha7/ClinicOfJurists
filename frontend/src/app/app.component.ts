@@ -12,7 +12,7 @@ import { Platform } from '@ionic/angular';
 })
 export class AppComponent {
   constructor(private platform: Platform) {
-    this.initializeApp();
+   this.initializeApp();
   }
 
   initializeApp() {

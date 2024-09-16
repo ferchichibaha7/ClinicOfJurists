@@ -1,33 +1,13 @@
-#container {
-  text-align: center;
+    /* Additional styles for enhanced glass effect */
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
+    .glass {
+      width: 100%;
+      background: rgba(196, 196, 196, 0.038); /* More transparent white background */
+      backdrop-filter: blur(5px); /* Stronger blur effect */
+      border: 1px solid rgba(255, 255, 255, 0); /* Slightly more visible border */
+      cursor: pointer;
+    }
+    .glass:hover {
+      background: rgba(196, 196, 196, 0.093); /* Less transparent, more white background on hover */
+      border: 1px solid rgba(255, 255, 255, 0.09); /* Slightly visible border on hover */
+    }

@@ -1,0 +1,12 @@
+.glass {
+  width: 100%;
+  background: rgba(196, 196, 196, 0.038); /* More transparent white background */
+  backdrop-filter: blur(5px); /* Stronger blur effect */
+  border: 1px solid rgba(255, 255, 255, 0); /* Slightly more visible border */
+  cursor: pointer;
+}
+.glass:hover {
+  background: rgba(196, 196, 196, 0.093); /* Less transparent, more white background on hover */
+  border: 1px solid rgba(255, 255, 255, 0.09); /* Slightly visible border on hover */
+}
+

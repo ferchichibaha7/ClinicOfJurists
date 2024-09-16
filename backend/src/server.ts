@@ -1,13 +1,17 @@
 import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
-import bcrypt from "bcryptjs";
-
 import { sequelize, connectAuthenticate } from "../config/database";
 import user from "./routes/api/user";
 import auth from "./routes/api/auth";
-import { User } from "./models/User";
-import { Role } from "./models/Role";
+import quiz from "./routes/api/quiz";
+import Question from "./routes/api/Question";
+import Option from "./routes/api/Option";
+import UserQuizzes from "./routes/api/UserQuizzes";
+import transaction from "./routes/api/transaction";
+import category from "./routes/api/category";
+import subcategory from "./routes/api/subcategory";
+import UserAnswers from "./routes/api/UserAnswers";
 
 const app = express();
 
@@ -15,15 +19,24 @@ const app = express();
 connectAuthenticate();
 sequelize.sync({logging:false}).then(async res=>{
   console.log("sync done");
-  await createRolesAndAdminIfNotExist();
-
 });
 
-// Express configuration
-app.use(cors());
+
+// CORS configuration to allow requests from localhost:8100
+const corsOptions = {
+  origin: 'http://localhost:8100', // Allow requests from this origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
+  allowedHeaders: 'Content-Type,Authorization', // Allowed headers
+};
+
+// Use CORS middleware with specified options
+app.use(cors(corsOptions));
+
+// Middleware to parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("port", process.env.PORT || 5000);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
 
 //routes
 app.get("/", (_req, res) => {
@@ -32,76 +45,20 @@ app.get("/", (_req, res) => {
 
 app.use("/api/auth", auth);
 app.use("/api/user", user);
+app.use("/api/quiz", quiz);
+app.use("/api/question", Question);
+app.use("/api/option", Option);
+app.use("/api/user-quizzes",UserQuizzes );
+app.use("/api/transaction", transaction);
+app.use("/api/category", category);
+app.use("/api/subcategory", subcategory);
+app.use("/api/user-answers", UserAnswers);
+
+
 
 const port = app.get("port");
 const server = app.listen(port, () =>
   console.log(`Server started on port ${port}`)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-// create admin if not exist on start server
-///////////////////////////////////////////
-async function createRolesAndAdminIfNotExist(): Promise<void> {
-  const rolesToCreate = [
-    { name: 'ADMIN' },
-    { name: 'STUDENT' },
-    { name: 'USER' }
-
-  ];
-
-  try {
-    // Create roles if they don't exist
-    for (const roleData of rolesToCreate) {
-      const existingRole = await Role.findOne({ where: { name: roleData.name } as any });
-      if (!existingRole) {
-        await Role.create(roleData);
-        console.log(`Role '${roleData.name}' created.`);
-      }
-    }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash('password123', salt);
-
-      // Create admin user
-      const adminData = {
-        name: 'marwa',
-        password: hashedPassword,
-        email:'marwabarhoumi@gmail.com',
-        phone_number:'29204755',
-        active:true,
-        role_id: 1, // Assuming role_id 1 represents the admin role
-      };
-
-    const existingAdmin = await User.findOne({ where: { name: adminData.name } as any });
-    if (!existingAdmin) {
-      await User.create(adminData);
-      console.log('Admin user created.');
-    } 
-  } catch (error) {
-    console.error('Error creating roles and admin:', error);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default server;

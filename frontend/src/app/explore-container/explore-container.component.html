@@ -1,6 +1,38 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <div class="login-container">
+<div class="grid place-items-center p-8 w-full">
+  <div  (click)="navigateToQuiz()" class="glass mb-4 relative w-64 h-36 rounded-lg shadow-lg flex items-center overflow-hidden py-4">
+    <img class="w-1/3 h-full object-contain" src="./assets/qcm.png" alt="Image">
+    <div class="flex flex-col justify-center p-4 w-2/3">
+      <div class="text-4xl font-medium text-gray-200">QCM</div>
+      <div class="text-xxs text-gray-500 mt-2">Plus de 2 000 questions à choix multiples (QCM) corrigées par nos meilleurs professeurs.</div>
+    </div>
+  </div>
 
+
+  <div class="glass mb-4 relative w-64 h-36 rounded-lg shadow-lg flex items-center overflow-hidden py-4">
+    <img class="w-1/3 h-full object-contain" src="./assets/pdf.png" alt="Image">
+    <div class="flex flex-col justify-center p-4 w-2/3">
+      <div class="text-4xl font-medium text-gray-200">PDFs</div>
+      <div class="text-xxs text-gray-500 mt-2">Débloquez une vaste collection de PDF expertement affinés, soigneusement élaborés pour vous.</div>
+    </div>
+  </div>
+
+
+  <div class="glass mb-4 relative w-64 h-36 rounded-lg shadow-lg flex items-center overflow-hidden py-4">
+    <img class="w-1/3 h-full object-contain" src="./assets/doc.png" alt="Image">
+    <div class="flex flex-col justify-center p-4 w-2/3">
+      <div class="text-4xl font-medium text-gray-200">DOCs</div>
+      <div class="text-xxs text-gray-500 mt-2">Déverrouillez une vaste collection de documents juridiques essentiels, soigneusement préparés pour vous.</div>
+    </div>
+  </div>
+
+
+
+  <div class="glass mb-4 relative w-64 h-36 rounded-lg shadow-lg flex items-center overflow-hidden py-4">
+    <img class="w-1/3 h-full object-contain" src="./assets/prof.png" alt="Image">
+    <div class="flex flex-col justify-center p-4 w-2/3">
+      <div class="text-4xl font-medium text-gray-200">PROFs</div>
+      <div class="text-xxs text-gray-500 mt-2">Rencontrez nos professeurs d'exception et explorez leurs expertises.</div>
+    </div>
   </div>
 </div>
+

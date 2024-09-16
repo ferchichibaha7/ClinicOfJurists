@@ -34,8 +34,15 @@
             "styles": ["src/global.scss", "src/theme/variables.scss"],
             "scripts": []
           },
+          "postcssOptions": {
+            "plugins": {
+              "tailwindcss": {},
+              "autoprefixer": {}
+            }
+          },
           "configurations": {
             "production": {
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",

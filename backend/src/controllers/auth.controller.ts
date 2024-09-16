@@ -26,6 +26,7 @@ export class authController {
 
   public async signup(...params) {
     const [req, res, next] = params;
+console.log(req);
 
     try {
       // Validate user input
@@ -73,6 +74,8 @@ export class authController {
   }
 
   public login = async (...params) => {
+    console.log('hello');
+    
     const [req, res, next] = params;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

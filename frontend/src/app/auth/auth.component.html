@@ -1,17 +1,57 @@
 <ion-content>
-  <!--
-  <div class="center-button">
-    <ion-button  expand="block" (click)="navigateToTab1()">
-      Go to Tab 1
-    </ion-button>
+  <div class="circle"></div>
+  <div class="circleb"></div>
 
-  </div>
-  -->
-  <div class="login-container w-42">
+  <div class="grid place-items-center p-12">
 
+    <img class="w-24 mt-8 mb-12" src="./assets/logo_white.png" alt="">
 
-    <ion-button expand="full" (click)="loginWithGoogle()">
-      Login with Google
-    </ion-button>
+    <button (click)="loginWithGoogle()" type="button" class="py-4 font-medium w-full text-gray-900 bg-white/30 backdrop-blur-lg hover:bg-white/40 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-xs px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-gray-600 dark:bg-white/10 dark:border-gray-700 dark:text-white dark:hover:bg-white/20 mb-2 relative">
+      <img src="./assets/icon/google.png" alt="Logo Google" class="h-4 w-4 absolute left-4">
+      Connexion avec Google
+    </button>
+    <span class="text-sm opacity-30 my-2">- OU -</span>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full mt-8">
+      <!-- Display error messages -->
+      <div *ngIf="errorMessages.length > 0" class="error-messages mb-4">
+        <div *ngFor="let error of errorMessages" class="text-red-500">
+          {{ error.msg }}
+        </div>
+      </div>
+
+      <!-- Email Input -->
+      <ion-item class="custom-item">
+        <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <div *ngIf="f['email'].errors?.['required'] && f['email'].touched" class="text-red-500 text-xxs mb-2">
+        L'email est requis.
+      </div>
+      <div *ngIf="f['email'].errors?.['email'] && f['email'].touched" class="text-red-500 text-xxs mb-2">
+        Entrez un email valide.
+      </div>
+
+      <!-- Password Input -->
+      <ion-item class="custom-item">
+        <ion-input formControlName="password" type="password" placeholder="Mot de passe"></ion-input>
+      </ion-item>
+      <div *ngIf="f['password'].errors?.['required'] && f['password'].touched" class="text-red-500 text-xxs mb-2">
+        Le mot de passe est requis.
+      </div>
+      <div *ngIf="f['password'].errors?.['minlength'] && f['password'].touched" class="text-red-500 text-xxs mb-2">
+        Le mot de passe doit comporter au moins 6 caractères.
+      </div>
+
+      <button type="submit" class="mt-4 py-4 w-full text-white bg-gradient-to-r rounded-lg font-medium text-sm px-5 text-center me-2 mb-2"
+        style="background: linear-gradient(to right, rgba(186, 64, 239, 0.168), rgba(97, 234, 170, 0.234));">
+        Connectez-vous à votre compte
+      </button>
+    </form>
+
+    <div class="flex my-2">
+      <span class="text-xxs opacity-30 mr-2">Pas encore membre ?</span>
+      <span class="text-xxs text-white">
+        <a [routerLink]="['/auth/register']" class="hover:underline">Inscrivez-vous maintenant</a>
+      </span>
+    </div>
   </div>
 </ion-content>

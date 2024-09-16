@@ -1,11 +1,10 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/**/*.{html,ts}',
+    "./src/**/*.{html,ts}",
+    "./node_modules/@ionic/angular/**/*.js", // Ensure to include Ionic components
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
-
+};

@@ -24,7 +24,9 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -32,6 +34,96 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import "@ionic/angular/css/palettes/dark.always.css";
+
+/* styles.scss */
+@font-face {
+  font-family: 'CustomArabicFont';
+  src: url('/assets/fonts/CustomArabicFont.woff2') format('woff2'),
+       url('/assets/fonts/CustomArabicFont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Apply Poppins font to the entire app */
+body {
+  font-family: 'Poppins', sans-serif !important;
+  color: #C8C8C8 !important;
+}
+
+.text-xs{
+  font-size: 14px !important;
+}
+.text-xxs{
+  font-size: 12px !important;
+}
+
+/* Apply Poppins font to specific components */
+ion-header, ion-content, ion-footer,ion-button {
+  font-family: 'Poppins', sans-serif !important;
+  color: #C8C8C8 !important;
+}
+
+
+
+/* Example: Apply Poppins to headings and text in your components */
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Poppins', sans-serif !important;
+  color: #C8C8C8 !important;
+}
+
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+html, body, ion-app, ion-content {
+  background-color: #121212 !important;
+}
+
+.toolbar-background {
+  background-color: #000000;
+}
+
+ion-toolbar{
+  --background:#121212;
+}
+.circle {
+  opacity: 0.5;
+
+  z-index: 1;
+  border-radius: 100%;
+  background-color: #df5c340d; /* Optional: background color */
+  box-shadow:
+    0 0 60px 60px rgba(255, 255, 255, 0.078),  /* Adjust inner shadow */
+    0 0 60px 60px rgba(255, 0, 238, 0.141), /* Adjust middle shadow */
+    0 150px 180px 190px rgba(255, 0, 238, 0.108), /* Adjust outer shadow */
+    0 150px 180px 210px rgba(255, 0, 238, 0.074);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+}
+
+.circleb {
+  z-index: 1;
+opacity: 0.5;
+  border-radius: 50%;
+  background-color: #7334df0d;
+  box-shadow:
+    0 0 60px 30px #bbe9221e,  /* inner white */
+    0 0 100px 60px rgba(25, 232, 191, 0.145), /* middle magenta */
+    0 0 100px 90px rgba(0, 255, 191, 0.051), /* outer cyan */
+    0 0 100px 150px rgba(0, 255, 191, 0.066); /* outer cyan */
+
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.rtl {
+  direction: rtl;
+  text-align: right; // Optional: Aligns text to the right
+  font-family: 'Cairo', sans-serif; /* Replace 'Cairo' with the name of your chosen font */
+
+}
+

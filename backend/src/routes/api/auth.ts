@@ -2,7 +2,6 @@ import { Router } from "express";
 import { check } from "express-validator/check";
 import auth from "../../middleware/auth";
 import { authController } from '../../controllers/auth.controller';
-import google_auth from "../../middleware/google_auth";
 
 
 const router: Router = Router();
