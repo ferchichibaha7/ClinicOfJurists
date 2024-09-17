@@ -19,4 +19,7 @@ export class Question extends Model {
 
   @Column
   correct_answer: number; // Stores the ID of the correct Option
+
+  @Column
+  desc_answer: string; // Question text
 }

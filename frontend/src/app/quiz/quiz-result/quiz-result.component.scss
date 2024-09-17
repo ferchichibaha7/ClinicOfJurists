@@ -1,0 +1,40 @@
+.glass {
+  width: 100%;
+  background: rgba(196, 196, 196, 0.038); /* More transparent white background */
+  backdrop-filter: blur(5px); /* Stronger blur effect */
+  border: 1px solid rgba(255, 255, 255, 0); /* Slightly more visible border */
+  cursor: pointer;
+}
+.glass:hover {
+  background: rgba(196, 196, 196, 0.093); /* Less transparent, more white background on hover */
+  border: 1px solid rgba(255, 255, 255, 0.09); /* Slightly visible border on hover */
+}
+
+.good{
+color: rgba(27, 203, 106, 0.852);
+}
+
+.bad{
+  color: rgba(231, 63, 97, 0.852);
+
+}
+.option{
+  border: 1px solid rgba(255, 255, 255, 0.09); /* Slightly visible border on hover */
+
+}
+
+.correct{
+  background: rgba(22, 198, 113, 0.496); /* More transparent white background */
+  backdrop-filter: blur(5px); /* Stronger blur effect */
+  border: 1px solid rgba(255, 255, 255, 0); /* Slightly more visible border */
+}
+
+.wrong{
+  background: rgba(198, 22, 81, 0.496); /* More transparent white background */
+  backdrop-filter: blur(5px); /* Stronger blur effect */
+  border: 1px solid rgba(255, 255, 255, 0); /* Slightly more visible border */
+}
+.correct_user{
+  border: 3px solid rgba(69, 239, 157, 0.815); /* Slightly more visible border */
+
+}

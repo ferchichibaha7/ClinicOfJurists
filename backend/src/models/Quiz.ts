@@ -1,4 +1,4 @@
-import { Table, Column, Model, HasMany, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Question } from './Question';
 import { Subcategory } from './Subcategory'; // Assuming you have a Subcategory model
 
@@ -16,4 +16,9 @@ export class Quiz extends Model {
 
   @HasMany(() => Question)
   questions: Question[];
+
+  @BelongsTo(() => Subcategory)
+  subcategory: Subcategory;
+
+
 }

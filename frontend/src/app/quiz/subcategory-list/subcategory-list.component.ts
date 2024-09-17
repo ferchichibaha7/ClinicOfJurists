@@ -44,6 +44,10 @@ export class SubcategoryListComponent  implements OnInit {
     });
   }
 
+  navigateToQuiz(subcategoryId: string) {
+    this.router.navigate([`subcategories/${subcategoryId}/quiz`]);
+  }
+
   goBack(): void {
     this.navCtrl.back();
   }

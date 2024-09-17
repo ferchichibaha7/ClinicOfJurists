@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { CategoryListComponent } from '../quiz/category-list/category-list.component';
 import { SubcategoryListComponent } from '../quiz/subcategory-list/subcategory-list.component';
+import { QuizListComponent } from '../quiz/quiz-list/quiz-list.component';
+import { QuizComponent } from '../quiz/quiz/quiz.component';
+import { QuizResultComponent } from '../quiz/quiz-result/quiz-result.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +55,18 @@ export const routes: Routes = [
   {
     path: 'categories/:categoryId/subcategories',
     component: SubcategoryListComponent,
+  },
+  {
+    path: 'subcategories/:subcategoryId/quiz',
+    component: QuizListComponent,
+  },
+  {
+    path: 'result/:resultid',
+    component: QuizResultComponent,
+  },
+  {
+    path: 'quiz/:quizId',
+    component: QuizComponent,
   },
   {
     path: '',

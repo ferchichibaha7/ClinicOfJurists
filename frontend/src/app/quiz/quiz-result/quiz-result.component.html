@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="results" class="rtl" slot="end">{{results.quiz_title}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <img class="w-8 " src="./assets/logo_white.png" alt="">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="circle"></div>
+  <div class="circleb"></div>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">قائمة التصنيفات</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="results"   class="grid  p-8 w-full">
+    <!--
+    <div *ngIf="results" [ngClass]="{'good': scoreColor === 'green','bad': scoreColor === 'red'}">
+     {{results.user_quiz.score}} / {{results.user_quiz.questions_answered}}
+    </div>
+    -->
+    <div *ngFor="let question of results.results">
+    <div  class="glass mb-4 relative w-64 h-18 rounded-lg shadow-lg flex items-center overflow-hidden py-4 rtl leading-relaxed">
+      <div class="flex flex-col w-full justify-end p-4 space-y-4">
+        <div class="flex items-center  text-xs font-medium text-gray-200 w-full ml-4">
+          <ion-icon *ngIf="question.is_answer_correct" name="checkmark-circle-outline" class="text-green-500 text-3xl mr-4"></ion-icon>
+          <ion-icon *ngIf="!question.is_answer_correct" name="close-circle-outline" class="text-red-500 text-3xl mr-4"></ion-icon>
+          <div class="leading-relaxed mr-3">{{question.question_text}} </div>
+        </div>
+        <div *ngFor="let option of question.options" class="flex text-xs font-medium text-gray-200 w-full ml-4">
+          <div  [ngClass]="{'correct': question.correct_answer === option.id ,'wrong': !option.isCorrect && question.user_answer === option.id,'correct_user': question.correct_answer === option.id && option.isCorrect   }" class=" rounded-lg shadow-lg py-2 px-4 w-full option leading-relaxed">{{option.text}} </div>
+        </div>
+        <!--
+        <div class="text-sm text-yellow-500 flex-1 leading-relaxed">
+          8
+        </div>
+        -->
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div *ngIf="!results " class="grid place-items-center p-8 w-full">
+    <div   class="glass mb-4 relative w-64 h-18 rounded-lg shadow-lg flex items-center overflow-hidden py-4 ">
+      <div class="flex flex-row items-center p-4 space-x-4">
+        <div class="text-xs text-gray-500 flex-1 leading-relaxed">
+          NO DATA
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

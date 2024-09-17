@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="quiz && category && subcategory" class="rtl" slot="end">{{quiz.title}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="circle"></div>
+  <div class="circleb"></div>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">قائمة التصنيفات</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="questions.length > 0" class="grid place-items-center p-8 w-full">
+    <div    class=" relative     flex items-center overflow-hidden w-full ">
+      <div class="">
+        <div class="tag rounded-lg px-2   text-xxs font-medium text-gray-800 w-100  leading-relaxed">
+          Question {{ currentQuestionId+1 }}/{{questions.length }}
+        </div>
+      </div>
+    </div>
+    <div    class=" mb-4 relative  h-18 rounded-lg  flex items-center overflow-hidden w-full py-4 rtl">
+      <div class=" p-4 space-x-4">
+        <div class="rtl text-right flex-shrink-0 text-xl font-medium text-gray-200 w-100 ml-4 leading-relaxed">
+          {{ questions[currentQuestionId].text }} :
+        </div>
+      </div>
+    </div>
+
+    <!-- Display options for the current question -->
+    <div *ngFor="let option of questions[currentQuestionId].options"
+         (click)="selectOption(questions[currentQuestionId].id, option.id,option.text)"
+         [ngClass]="{'selectedOption': selectedOptions[currentQuestionId]?.optionId === option.id || false}"
+         class="glass mb-4 relative w-64 rounded-lg shadow-lg flex items-center py-4 rtl">
+      <div class="flex flex-row items-center p-2 space-x-4">
+        <div class="text-sm font-medium text-gray-200 w-100 ml-4 leading-relaxed">
+          {{ option.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="questions.length === 0" class="grid place-items-center p-8 w-full">
+    <div   class="glass mb-4 relative w-64 h-18 rounded-lg shadow-lg flex items-center overflow-hidden py-4 ">
+      <div class="flex flex-row items-center p-4 space-x-4">
+        <div class="text-xs text-gray-500 flex-1 leading-relaxed">
+          NO DATA
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Fixed Buttons -->
+    <div *ngIf="questions.length > 0" class="fixed-buttons">
+      <div (click)="prevQuestion()" *ngIf="currentQuestionId > 0" expand="full" class=" glassbutton  w-64 h-18 shadow-lg  overflow-hidden  flex items-center justify-center py-4 text-center previous-button ">Précédent</div>
+      <div *ngIf="currentQuestionId+1<questions.length" (click)="nextQuestion()" expand="full" class=" glassbutton  w-64 h-18  shadow-lg  overflow-hidden  flex items-center justify-center py-4 text-center next-button">Suivant</div>
+      <div  *ngIf="currentQuestionId+1===questions.length" (click)="showResult()" expand="full" class=" glassbutton  w-64 h-18  shadow-lg  overflow-hidden  flex items-center justify-center py-4 text-center save-button">Résultat</div>
+
+    </div>
+</ion-content>
